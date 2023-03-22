@@ -3,9 +3,6 @@
     <div id="container" tabindex = "0"
         class = "blockquto text-nowrap">   
     </div>
-    <button onclick="timerAll()" class="btn btn-secondary">
-    Run Again
-    </button>
 </body>
 <script>
     var container = document.getElementById('container');
@@ -13,22 +10,20 @@
     window.onload = function(){
        container.textContent = rand_func + container.textContent.substring(1);
     }
-    if(container.textContent.length == 0){
-        window.onload = timerAll();
-    }
 
     window.addEventListener("keyup", function(e) {
         console.log(e.key);
         var firstChar = container.textContent.charAt(0); // 取得第一個字元
-        if(e.key == firstChar && container.textContent.length > 0){ 
+        if(e.key == firstChar){ 
+            var firstChar = container.textContent.charAt(0);
             container.textContent = container.textContent.substring(1);//delete first char
-            rand_func.length--;
-        } else if (container.textContent.length == 0) {
             container.textContent += add_new_chars();
-            timerAll();
-        } else {
-            container.textContent = container.textContent;
-        } 
+        }
+        // } else if (container.textContent.length == 0) {
+        //     container.textContent += add_new_chars();
+        // } else {
+        //     container.textContent = container.textContent;
+        // } 
     }
     );
 
@@ -41,22 +36,6 @@
         }
         return string_add;
     }
-    
-    function timerAll() {
-        alert("是否重新載入?");
-        container.textContent = rand_func + container.textContent.substring(1);
-        window.addEventListener("keyup", function(e) {
-            console.log(e.key);
-            firstChar = container.textContent.charAt(0); // 取得第一個字元
-            if(e.key == firstChar && container.textContent.length > 0){ 
-                rand_func.length--;
-            } else if (container.textContent.length == 0) {
-                container.textContent += add_new_chars();
-                timerAll();
-            } else {
-                container.textContent = container.textContent;
-            } 
-        });
-    }
+
 
 </script>
