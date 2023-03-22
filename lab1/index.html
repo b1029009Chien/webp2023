@@ -1,0 +1,30 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<body>
+  <div id="container" tabindex = "0"
+       class = "blockquto text-nowrap">   
+  </div>
+</body>
+<script>
+    var container = document.getElementById('container');
+    //var randChars = getRandomChars(); // 取得亂數字元
+    window.addEventListener("keyup", function(e) {
+    console.log(e.key);
+    if(e.key == firstChar) {
+        var firstChar = container.textContent.charAt(0); // 取得第一個字元
+        
+    } else if(e.key == 'Backspace'){
+        var str = container.textContent;
+        container.textContent = str.substring(0, str.length-1);
+    } else {
+        container.textContent += e.key;
+    }
+    function add_new_chars(){
+        var numsize = Math.floor(Math.random() * 3) + 1; // 產生 1 到 3 個字元
+    var chars = "";
+    for (var i = 0; i < numChars; i++) {
+        chars += String.fromCharCode(Math.floor(Math.random() * 26) + 97); // 產生 a 到 z 的亂數字元
+    }
+    return chars;
+    }
+    });
+</script>
