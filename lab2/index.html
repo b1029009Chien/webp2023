@@ -29,8 +29,8 @@
 
     function delOldData(){
       var myTable = document.getElementById("csie");
-      var rowCount = c.length;
-      if(rowCount != 1){
+      var rowCount = myTable.rows.length;//count長度
+      if(rowCount > 1){
         myTable.deleteRow(-1);
         rowCount--;
       }
