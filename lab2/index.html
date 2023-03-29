@@ -1,37 +1,40 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<h1>資工選課表<h1>
-<table id = 'csie' class="table table-striped table-hover">
-  <tr>
-    <th>開課單位</th>
-    <th>課程名稱</th>
-    <th>授課老師</th>
-  </tr>
-  </table>
+<body>
+      <h1>資工選課表<h1>
+      <table id = 'csie' class="table table-striped table-hover">
+        <tr>
+          <th>開課單位</th>
+          <th>課程名稱</th>
+          <th>授課老師</th>
+        </tr>
+        </table>
   
-  <button onclick="addNewData()"> addNewData</button>
-  <button onclick="delOldData()"> delOldData</button>
-<script>
-  var d = ["資工系","資工系","資工系","資工系","資工系","資工系"];
-var c = ["物件導向設計","計算機網路實驗","作業系統實務","生物統計","通訊系統","軟硬體專題(2)"];
-var t = ["黃","李","張","陳光武","陳仁輝","魏"];
-function addNewData(){
-  var myTable = document.getElementById("csie");
-  var rowCount = c.length;
-  for(var i = 0; i < rowCount; i++){
-    var row = myTable.insertRow(-1);
-    row.insertCell(0).innerHTML = d[i];
-    row.insertCell(1).innerHTML = c[i];
-    row.insertCell(2).innerHTML = t[i];
-    console.log(d[i], c[i], t[i]);
-  }
-}
+      <button onclick="addNewData()"> addNewData</button>
+      <button onclick="delOldData()"> delOldData</button>
+    <script>
+      var d = ["資工系","資工系","資工系","資工系","資工系","資工系"];
+    var c = ["物件導向設計","計算機網路實驗","作業系統實務","生物統計","通訊系統","軟硬體專題(2)"];
+    var t = ["黃","李","張","陳光武","陳仁輝","魏"];
+    function addNewData(){
+      var myTable = document.getElementById("csie");
+      var rowCount = c.length;
+      for(var i = 0; i < rowCount; i++){
+        var row = myTable.insertRow(-1);
+        row.insertCell(0).innerHTML = d[i];
+        row.insertCell(1).innerHTML = c[i];
+        row.insertCell(2).innerHTML = t[i];
+        console.log(d[i], c[i], t[i]);
+      }
+    }
 
-function delOldData(){
-  var myTable = document.getElementById("csie");
-  var rowCount = c.length;
-  if(rowCount != 1){
-    myTable.deleteRow(-1);
-    rowCount--;
-  }
-}
-</script>
+    function delOldData(){
+      var myTable = document.getElementById("csie");
+      var rowCount = c.length;
+      if(rowCount != 1){
+        myTable.deleteRow(-1);
+        rowCount--;
+      }
+    }
+    </script>
+  </body>
+ </html>
