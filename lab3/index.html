@@ -47,6 +47,7 @@ xhr.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
         dataset = JSON.parse(this.responseText);
         add_new_img(dataset);
+        console.log(dataset);
     }
 };
 }
@@ -54,9 +55,9 @@ xhr.onreadystatechange = function(){
 function add_new_img(dataset){
     mygallery = document.getElementById("gallery");
     var img = document.createElement("img");
-    dataset.forEach(function(data, index){
-        img = data['urls']['full'];
+    for (var i = 0; i < dataset.length; i++) {
+        img.src = dataset[i].urls.small;
         mygallery.appendChild(img);
-    });
+    }
 }
 </script>
