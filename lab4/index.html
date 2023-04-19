@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body>
+  <h1>景點觀光展覽資訊   搜尋：<input type="text" id="search" onchange="search()">
+  <table id="csie" class="table table-striped table-hover"><h1>
+    <thead><!--標題-->
+        <tr>
+        <th>名稱</th>
+        <th>地點</th>
+        <th>票價</th>
+        </tr>
+    </thead><tbody><!--content-->
+    </tbody>
+  <table>
+    <button type="button" class="btn btn-dark" onclick="lastpage()">&lt; 上一頁</button>
+    <span id="nowpage"> </span>
+    <button type="button" class="btn btn-dark" onclick="nextpage()">下一頁 &gt;</button>
+</body>
+  <script>
+    //初始設定
+    var openUrl = "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6"
+    fetch(openUrl, {method:'GET'})
+    .then(res => {
+        return res.text();//轉換成text格式(Ex:二進位)
+      }).then(result => {
+        dataset = JSON.parse(result);
+        addNewData(dataset);
+    });
+    //分頁設定
+    var currentpage = 1;
+    var itemperpage = 10;
+    var pages = [];
 
+    function addNewData(dataset, page = 1){
+        var myTable = document.getElementById("csie").getElementsByTagName('tbody')[0];
+        //清空之前的資料
+        myTable.innerHTML = '';
+        //第一頁:0-10, 第二頁:10-20
+        var startIndex = (page - 1) * itemperpage;
+        var endIndex = startIndex + itemperpage;
+        //複製開始與結束點（結束點不算）中的內容
+        var dataresult = dataset.slice(startIndex, endIndex);
+        //顯示那頁的內容
+        dataresult.forEach(function(data, index){
+            var row = myTable.insertRow(-1);
+            row.insertCell(0).innerHTML = data['title'];
+            row.insertCell(1).innerHTML = data['showInfo'][0]['location'];
+            row.insertCell(2).innerHTML = data['showInfo'][0]['price'];
+       });
+       updatePage();
+    };
+
+    //目前頁數
+    function updatePage() {
+        var nowpages = document.getElementById("nowpage");
+        //Math.ceil()是無條件進位
+        var totalpage = Math.ceil(pages.length / itemperpage);
+        var current = '';
+        if (pages.length > 0) {
+            current = `第 ${currentpage} 頁 / 共 ${totalpage} 頁`;
+        } else {
+            current = `第 ${currentpage} 頁 / 共 ${Math.ceil(dataset.length / itemperpage)} 頁`;
+        }
+        nowpages.innerHTML = current;
+    }
+    
+    //上個頁面
+    function lastpage() {
+        var data = pages.length > 0 ? pages : dataset;
+        if (currentpage > 1) {
+            currentpage = currentpage - 1;
+            addNewData(data, currentpage);
+        }
+    }
+
+    //下個頁面
+    function nextpage() {
+        var data = pages.length > 0 ? pages : dataset;
+        if (currentpage < Math.ceil(data.length / itemperpage)) {
+            currentpage = currentpage + 1;
+            addNewData(data, currentpage);
+        }
+    }
+
+    //搜尋功能
+    function search() {
+        var keyword = document.getElementById("search").value.toLowerCase();
+        //找出與關鍵字相同的字
+        pages = dataset.filter(function (data) {
+            return data.title.toLowerCase().indexOf(keyword) > -1;
+        });
+        currentpage = 1;
+        addNewData(pages, currentpage);
+        updatePage();
+    }
+  </script>
+</html>
+    
