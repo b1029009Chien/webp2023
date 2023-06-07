@@ -44,3 +44,38 @@ div.other_style{
   background: linear-gradient(to bottom, rgb(1, 138, 15), rgb(255, 255, 255));
   
 }
+
+.card_style{
+  border: 1px solid rgb(255, 255, 255);
+  
+  /* 預設值 to bottom */
+  background: linear-gradient(to bottom, rgb(101, 151, 7), rgb(255, 255, 255));
+}
+
+.custom-toggler {
+  border-color: transparent;
+  float: right;
+}
+
+.collapsed {
+  transform: translateX(-100%);
+}
+
+.content.collapsed {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.content {
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.customTextColor{
+  color: rgb(225, 209, 147);
+}
+

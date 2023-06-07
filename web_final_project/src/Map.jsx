@@ -1,23 +1,27 @@
-import React, { useEffect } from 'react';
-import L from 'leaflet';
+import React from 'react';
+import { MapContainer, TileLayer, Marker  } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { icon } from 'leaflet';
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
 
+const customIcon = icon({
+  iconUrl: FmdGoodIcon,
+  iconSize: [1000, 1000], // Set the icon size
+  iconAnchor: [25.0349234,121.3852018], // Set the icon anchor point
+});
 
 const Map = () => {
-    useEffect(() => {
-      // Create the map container
-      const map = L.map('map').setView([51.505, -0.09], 13);
-  
-      // Create and add a tile layer to the map
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Map data © OpenStreetMap contributors',
-      }).addTo(map);
-  
-      // Add a marker to the map
-      L.marker([51.5, -0.09]).addTo(map);
-    }, []);
-  
-    return <div id="map" style={{ height: '180px' }} />;
-  };
-  
-  export default Map
+  const center = [25.0349234,121.3852018]; // Initial map center
+  const zoom = 15; // Initial map zoom level
+
+  return (
+    <MapContainer center={center} zoom={zoom} style={{ height: '400px' }}>
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <FmdGoodIcon>
+        <Marker  position={center} icon={customIcon}/>
+      </FmdGoodIcon>
+    </MapContainer>
+  );
+};
+
+export default Map
